@@ -1,4 +1,4 @@
-.PHONY: format install_hooks lint noteboo spec
+.PHONY: format install_hooks lint noteboo spec zip_release
 
 format:
 	poetry run yapf --in-place --recursive --parallel \
@@ -21,3 +21,8 @@ notebook:
 
 spec:
 	poetry run mamba --format=documentation --enable-coverage
+
+zip_release:
+	rm -f dist/*
+	poetry build --format wheel
+	zip -1 dist/MINTmap.zip README.txt dist/*.whl

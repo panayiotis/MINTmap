@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mintmap"
+name = "MINTmap"
 version = "3.0.0"
 description = ""
 authors = ["Panayiotis Vlantis <pxv032@jefferson.edu>"]
@@ -10,8 +10,8 @@ PyYAML = "^5.3.1"
 Jinja2 = "^2.11.2"
 
 [tool.poetry.scripts]
-mintmap = 'mintmap.__main__:run'
 MINTmap = 'mintmap.__main__:run'
+mintmap = 'mintmap.__main__:run'
 
 [tool.poetry.dev-dependencies]
 Sphinx = "^3.3.0"
