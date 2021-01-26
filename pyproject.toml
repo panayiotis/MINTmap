@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "mintmap"
+name = "MINTmap"
 version = "3.0.0"
-description = ""
+description = "MINTmap generates tRF (tRNA fragment) profiles from a trimmed short RNA-Seq dataset."
 authors = ["Panayiotis Vlantis <pxv032@jefferson.edu>"]
 
 [tool.poetry.dependencies]
@@ -10,7 +10,6 @@ PyYAML = "^5.3.1"
 Jinja2 = "^2.11.2"
 
 [tool.poetry.scripts]
-mintmap = 'mintmap.__main__:run'
 MINTmap = 'mintmap.__main__:run'
 
 [tool.poetry.dev-dependencies]

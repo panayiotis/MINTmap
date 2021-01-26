@@ -1,20 +1,33 @@
 # MINTmap
 
-If you just want to download the latest version for basic usage, please visit
+To download the MINTmap tool, please visit
 [cm.jefferson.edu/MINTmap](https://cm.jefferson.edu/MINTmap).
 
-MINTmap generates tRF (tRNA fragment) profiles from a trimmed short RNA-Seq dataset.
-It is available under the open source GNU GPL v3.0 license.
-
+MINTmap generates tRF (tRNA fragment) profiles from a trimmed short RNA-Seq
+dataset.  
 Note: Color-space reads are not supported in this tool.
 For information on methods and color-space, please see
 [this paper](http://www.nature.com/articles/srep41184).
 
-MINTmap is developed and maintained by
+MINTmap is developed and maintained by the
 [Computational Medicine Center](https://cm.jefferson.edu),
 Thomas Jefferson University.
-You can contact us at:
+
+To cite MINTmap use: *Loher, P. et al. MINTmap: fast and exhaustive profiling of
+nuclear and mitochondrial tRNA fragments from short RNA-seq data.
+Sci. Rep. 7, 41184; doi: 10.1038/srep41184 (2017).*
+
+You can contact us at
 [cm.jefferson.edu/contact-us](https://cm.jefferson.edu/contact-us)
+
+
+## License
+
+MINTmap is available under the open source GNU GPL v3.0 license
+(https://www.gnu.org/licenses/gpl-3.0.en.html).  
+Included MINTplates library uses a different license, for more information see
+the README file within the downloadable bundle.
+
 
 ## Publications
 
@@ -32,72 +45,67 @@ Bioinformatics. 2016;32 (16):2481-9. doi:
 PubMed [PMID:27153631](http://www.ncbi.nlm.nih.gov/pubmed/27153631).
 PubMed Central [PMC4978933](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4978933).
 
+
 ## Installation
 
-To use MINTmap you need to have python3 installed.
-To install MINTmap, run:
-```sh
-pip3 --user install TODO
-```
+To use MINTmap, you need to have [python3](https://www.python.org/downloads/)
+(version 3.7 or higher) installed.
+
+Download the latest MINTmap from
+[cm.jefferson.edu/MINTmap](https://cm.jefferson.edu/MINTmap)
+and then uncompress the contents.
+
+Open a terminal and move to the directory that contains the uncompressed
+contents.
+
+To install MINTmap run:
+
+    pip3 install dist/MINTmap-3.0.0-py3-none-any.whl
+
+Note: According to your specific OS and python configuration, you may have to
+use pip instead of pip3 and/or run pip with the argument `--user` which might
+install MINTmap in a location that is not in PATH. If this is the case, you'll
+have to use its absolute path to run it. For more information check out the
+official python tutorial on
+[installing packages](https://packaging.python.org/tutorials/installing-packages/).
+
 
 ## Usage
 
-After installing MINTmap, to generate tRF profiles from a fastq file, run:
-```sh
-MINTmap /.../path_to_trimmed_input_file.fastq
-```
+After installation, run MINTmap without any arguments to get usage information.
 
-### Example
+### Example Run
 
 To run the tRF profiles of the trimmed fastq file that resides in the directory
 `ExampleRun` do the following:
 
-* open a terminal and `cd` to the directory of this README file.
-e.g. `cd Downloads/TODO/`
-* then cd to the directory of the `ExampleRun` by running: `cd ExampleRun`
-* finally generate the tRF profiles of the trimmed fastq file in the current
-directory by running: `MINTmap exampleInput.trimmed.fastq.gz
-* run `ls` to list the output files in the current directory
+Open a terminal and `cd` to the directory of this README file. e.g.:
 
-## Program Arguments
+    cd Downloads/MINTmap/
 
-```
-usage: MINTmap [-h] [-c CUSTOM_RPM] [-m MAPPING_BUNDLE_PATH] [-p PREFIX]
-               [--log-level {debug,info,warning}]
-               input_file_path
+Then, `cd` to the directory of the `ExampleRun` by running:
 
-MINTmap generates tRF (tRNA fragment) profiles from a trimmed short RNA-Seq dataset.
+    cd ExampleRun
 
-positional arguments:
-  input_file_path       The input_file_path contains the sequenced reads to be
-                        analyzed. Any trimming (e.g. quality and adapter trimming)
-                        must be done prior to running this tool. If
-                        input_file_path ends in .gz it will be treated as a
-                        gzipped FASTQ file. The FASTQ file contains four lines per
-                        read (more info here:
-                        https://en.wikipedia.org/wiki/FASTQ_format). Color-space
-                        reads are not supported. This is a required argument.
+To generate the tRF profiles of the trimmed fastq file in the current
+directory run:
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -c CUSTOM_RPM, --custom-rpm CUSTOM_RPM
-                        The value CUSTOM_RPM is meant to be used as alternative
-                        denominator when computing the rpm abundance of an isomir.
-                        When this parameter is defined by the user, an additional
-                        column in the output files will be populated with rpm
-                        values that have been calculated using this value in the
-                        denominator - i.e. these values will be equal to raw
-                        reads/<customrpm>*1,000,000, a common value to use here is
-                        the original number of sequenced reads prior to quality
-                        and adaptor-trimming.
-  -m MAPPING_BUNDLE_PATH, --mapping-bundle MAPPING_BUNDLE_PATH
-                        This is the relative or absolute path to the mapping
-                        bundle that will be used. If not specified, the default
-                        mapping bundle will be used.
-  -p PREFIX, --prefix PREFIX
-                        Naming prefix for the generated files. If not specified,
-                        OUTPUT_PREFIX will be set to "output" and all output files
-                        will be generated in the current working directory.
-  --log-level {debug,info,warning}
-                        Set the logging level. The default is info.
-```
+    MINTmap exampleInput.trimmed.fastq.gz
+
+Finaly, run `ls` to list the output files in the current directory:
+
+    ls
+
+
+## Output Files
+
+* Plain text and HTML file pairs for exclusive tRFs profiles
+(\*.exclusive-tRFs.expression.\*).  
+RPM and annotation information included.  
+HTML file also links to verbose MINTbase records.
+* Plain text and HTML file pairs for non-exclusive tRFs profiles
+(\*.ambiguous-tRFs.expression.\*).  
+RPM and annotation information included.  
+HTML file also links to verbose MINTbase records.
+* High level mapping stats are also generated seperately for exclusive and
+non-exclusive tRFs (\*.countsmeta.txt)

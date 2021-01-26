@@ -36,6 +36,7 @@ class App(metaclass=AppMetaClass):
         return self.__dict__
 
     def parse_arguments(self):
+        #TODO: change to pathlib
         package_path = os.path.dirname(__file__)
         default_mapping_bundle_path = os.path.join(
             package_path,
@@ -47,6 +48,7 @@ class App(metaclass=AppMetaClass):
             'MINTmap generates tRF (tRNA fragment) profiles '
             'from a trimmed short RNA-Seq dataset.'
         )
+
         parser = ArgumentParser(
             description=description,
             allow_abbrev=False,
@@ -113,6 +115,7 @@ class App(metaclass=AppMetaClass):
                 output files will be generated in the current working directory.
             '''
         )
+
         parser.add_argument(
             "--log-level",
             default='info',

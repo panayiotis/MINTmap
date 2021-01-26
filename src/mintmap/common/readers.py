@@ -27,14 +27,19 @@ def fastq(path):
 
     if path.endswith('.gz') or path.endswith('.gzip'):
         logger.debug(f"{path} is compressed")
-        if shutil.which("zcat"):
-            logger.debug('fastq: zcat is in path')
-            pipe = subprocess.Popen(["zcat", path], stdout=subprocess.PIPE)
+        if shutil.which("gunzip"):
+            logger.debug('fastq: gunzip is in path')
+            pipe = subprocess.Popen(
+                ['gunzip',
+                 '--stdout',
+                 path],
+                stdout=subprocess.PIPE
+            )
             input_file = io.BytesIO(pipe.communicate()[0])
             if pipe.returncode != 0:
-                raise Exception('error calling zcat')
+                raise Exception('error calling gunzip')
         else:
-            logger.debug('fastq: zcat is not in path')
+            logger.debug('fastq: gunzip is not in path')
             input_file = io.BufferedReader(gzip.open(path, 'rb'))
     else:
         logger.debug(f"fastq: {path} file is not compressed")
@@ -103,14 +108,19 @@ def exit_if_fastq_file_is_not_trimmed(path):
 
     if path.endswith('.gz') or path.endswith('.gzip'):
         logger.debug(f"{path} is compressed")
-        if shutil.which("zcat"):
-            logger.debug('zcat is in path')
-            pipe = subprocess.Popen(["zcat", path], stdout=subprocess.PIPE)
+        if shutil.which("gunzip"):
+            logger.debug('gunzip is in path')
+            pipe = subprocess.Popen(
+                ['gunzip',
+                 '--stdout',
+                 path],
+                stdout=subprocess.PIPE
+            )
             input_file = io.BytesIO(pipe.communicate()[0])
             if pipe.returncode != 0:
-                raise Exception('error calling zcat')
+                raise Exception('error calling gunzip')
         else:
-            logger.debug('zcat is not in path')
+            logger.debug('gunzip is not in path')
             input_file = io.BufferedReader(gzip.open(path, 'rb'))
     else:
         logger.debug(f"{path} file is not compressed")
@@ -138,10 +148,11 @@ def exit_if_fastq_file_is_not_trimmed(path):
 
     if total_histogram_keys == 1:
         logger.critical(
-            'It seems that all the sequences in the input file have the same '
-            f' length ({histogram.keys()[0]}) which is an indication that the '
-            'input file is not trimmed. Please trim the adapters '
-            '(e.g. using cutadapt) and provide the trimmed input file.'
+            'The first 500 sequences in the input file have the same length '
+            f"({histogram.keys()[0]}) "
+            'which is an indication that the input file has not been trimmed. '
+            'Please trim the adapters (e.g. using a tool such as cutadapt) and '
+            'provide the trimmed input file.'
         )
         exit(1)
     else:
