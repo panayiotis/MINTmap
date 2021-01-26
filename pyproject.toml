@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "mintmap"
+version = "3.0.0"
+description = ""
+authors = ["Panayiotis Vlantis <pxv032@jefferson.edu>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+PyYAML = "^5.3.1"
+Jinja2 = "^2.11.2"
+
+[tool.poetry.scripts]
+mintmap = 'mintmap.__main__:run'
+MINTmap = 'mintmap.__main__:run'
+
+[tool.poetry.dev-dependencies]
+Sphinx = "^3.3.0"
+coverage = "^5.3"
+expects = "^0.9.0"
+flake8 = "^3.8.4"
+mamba = "^0.11.1"
+sphinx-rtd-theme = "^0.5.0"
+yapf = "^0.30.0"
+jupyter = "^1.0.0"
+jupyter-contrib-nbextensions = "^0.5.1"
+jupyter_nbextensions_configurator = "^0.4.1"
+bash_kernel = "^0.7.2"
+yamllint = "^1.25.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
