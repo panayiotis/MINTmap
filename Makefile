@@ -1,4 +1,4 @@
-.PHONY: format install_hooks lint noteboo spec zip_release
+.PHONY: format install_hooks lint notebook_ spec zip_release
 
 format:
 	poetry run yapf --in-place --recursive --parallel \
